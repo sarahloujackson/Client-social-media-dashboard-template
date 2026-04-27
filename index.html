@@ -1,0 +1,220 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);background:var(--color-background-tertiary);color:var(--color-text-primary)}
+.cc{padding:16px;max-width:100%}
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding:14px 18px;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg)}
+.header-left{display:flex;align-items:center;gap:10px}
+.logo{width:32px;height:32px;background:#fbeaf0;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px}
+.header-title{font-size:15px;font-weight:500}
+.header-meta{font-size:12px;color:var(--color-text-secondary);margin-top:2px}
+.header-right{display:flex;align-items:center;gap:8px}
+.date-chip{font-size:12px;color:var(--color-text-secondary);padding:5px 10px;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md)}
+.btn-refresh{font-size:12px;padding:6px 14px;background:#d4537e;color:#fff;border:none;border-radius:var(--border-radius-md);cursor:pointer;font-weight:500}
+.btn-refresh:hover{background:#993556}
+.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;align-items:start}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:16px 18px}
+.card-title{font-size:13px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.04em;margin-bottom:14px}
+.tabs{display:flex;gap:2px;margin-bottom:14px;background:var(--color-background-secondary);padding:3px;border-radius:var(--border-radius-md)}
+.tab{flex:1;padding:6px 0;font-size:12px;font-weight:500;text-align:center;border:none;background:transparent;cursor:pointer;border-radius:6px;color:var(--color-text-secondary)}
+.tab.active{background:var(--color-background-primary);color:var(--color-text-primary);border:0.5px solid var(--color-border-tertiary)}
+.metrics-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.metric-box{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px}
+.metric-label{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px}
+.metric-val{font-size:20px;font-weight:500;line-height:1}
+.metric-delta{font-size:11px;margin-top:4px}
+.delta-up{color:#3B6D11}
+.delta-down{color:#A32D2D}
+.goals-list{display:flex;flex-direction:column;gap:10px}
+.goal-row{}
+.goal-meta{display:flex;justify-content:space-between;margin-bottom:4px}
+.goal-name{font-size:12px;color:var(--color-text-primary)}
+.goal-pct{font-size:12px;font-weight:500;color:#d4537e}
+.bar-track{background:var(--color-background-secondary);border-radius:4px;height:6px;overflow:hidden}
+.bar-fill{height:100%;background:#d4537e;border-radius:4px;transition:width .8s cubic-bezier(.4,0,.2,1)}
+.posts-table{width:100%;font-size:12px;border-collapse:collapse}
+.posts-table th{font-size:11px;color:var(--color-text-secondary);text-align:left;padding:0 0 8px;font-weight:500}
+.posts-table td{padding:7px 0;border-top:0.5px solid var(--color-border-tertiary);vertical-align:middle}
+.posts-table tr:hover td{background:var(--color-background-secondary)}
+.thumb{width:28px;height:28px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;margin-right:6px;vertical-align:middle}
+.badge{display:inline-block;font-size:10px;font-weight:500;padding:2px 7px;border-radius:10px}
+.badge-ig{background:#FBEAF0;color:#993556}
+.badge-tt{background:#2C2C2A;color:#D3D1C7}
+.badge-yt{background:#FCEBEB;color:#A32D2D}
+.badge-pod{background:#EEEDFE;color:#3C3489}
+.deals-table{width:100%;font-size:12px;border-collapse:collapse}
+.deals-table th{font-size:11px;color:var(--color-text-secondary);text-align:left;padding:0 0 8px;font-weight:500}
+.deals-table td{padding:7px 0;border-top:0.5px solid var(--color-border-tertiary);vertical-align:middle}
+.status{display:inline-block;font-size:10px;padding:2px 7px;border-radius:10px;font-weight:500}
+.s-active{background:#EAF3DE;color:#3B6D11}
+.s-pending{background:#FAEEDA;color:#854F0B}
+.s-done{background:var(--color-background-secondary);color:var(--color-text-secondary)}
+.briefing-card{background:#fffbf2;border:0.5px solid #FAC775}
+.briefing-text{font-size:13px;line-height:1.7;color:var(--color-text-primary);opacity:1;transition:opacity .4s}
+.briefing-text.fade{opacity:0}
+.btn-regen{margin-top:12px;font-size:11px;padding:5px 12px;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);background:transparent;cursor:pointer;color:var(--color-text-secondary)}
+.btn-regen:hover{background:var(--color-background-secondary)}
+.comments-list{display:flex;flex-direction:column;gap:8px}
+.comment-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px;display:flex;gap:10px;align-items:flex-start}
+.avatar{width:30px;height:30px;min-width:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500}
+.comment-body{}
+.comment-user{font-size:12px;font-weight:500}
+.comment-text{font-size:12px;color:var(--color-text-secondary);margin-top:2px;line-height:1.5}
+.comment-plat{font-size:11px;color:var(--color-text-secondary);margin-top:3px}
+.sponsors-list{display:flex;flex-direction:column;gap:8px}
+.sponsor-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-top:0.5px solid var(--color-border-tertiary)}
+.sponsor-row:first-child{border-top:none;padding-top:0}
+.sponsor-left{display:flex;align-items:center;gap:10px}
+.sponsor-icon{width:28px;height:28px;border-radius:6px;background:var(--color-background-secondary);display:flex;align-items:center;justify-content:center;font-size:12px}
+.sponsor-name{font-size:12px;font-weight:500}
+.sponsor-ep{font-size:11px;color:var(--color-text-secondary)}
+.income-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.income-total{grid-column:1/-1;background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px;display:flex;justify-content:space-between;align-items:center}
+.income-total-label{font-size:11px;color:var(--color-text-secondary)}
+.income-total-val{font-size:22px;font-weight:500;color:#3B6D11}
+.income-item{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px}
+.income-item-label{font-size:11px;color:var(--color-text-secondary);margin-bottom:3px}
+.income-item-val{font-size:15px;font-weight:500}
+.headlines-list{display:flex;flex-direction:column;gap:7px}
+.headline-row{display:flex;align-items:flex-start;gap:8px;padding:8px 0;border-top:0.5px solid var(--color-border-tertiary)}
+.headline-row:first-child{border-top:none;padding-top:0}
+.hl-dot{width:6px;height:6px;min-width:6px;border-radius:50%;margin-top:5px}
+.hl-text{font-size:12px;line-height:1.5}
+.hl-meta{font-size:11px;color:var(--color-text-secondary);margin-top:2px}
+</style>
+
+<div class="cc">
+  <div class="header">
+    <div class="header-left">
+      <div class="logo">🌸</div>
+      <div>
+        <div class="header-title">Hi Sarah 👋</div>
+        <div class="header-meta">Your personal brand dashboard</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="date-chip" id="date-chip"></div>
+      <button class="btn-refresh" onclick="refreshBriefing()">Refresh briefing</button>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="card">
+        <div class="tabs">
+          <button class="tab active" onclick="switchPlatform('ig',this)">Instagram</button>
+          <button class="tab" onclick="switchPlatform('tt',this)">TikTok</button>
+          <button class="tab" onclick="switchPlatform('yt',this)">YouTube</button>
+          <button class="tab" onclick="switchPlatform('pod',this)">Podcast</button>
+        </div>
+        <div class="metrics-grid" id="metrics-grid"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">2026 goals</div>
+        <div class="goals-list" id="goals-list"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Income this month</div>
+        <div class="income-grid">
+          <div class="income-total">
+            <div><div class="income-total-label">Total revenue</div><div class="income-total-val">$14,820</div></div>
+            <div style="font-size:11px;color:#3B6D11;font-weight:500">+18% vs last mo</div>
+          </div>
+          <div class="income-item"><div class="income-item-label">Brand deals</div><div class="income-item-val">$7,500</div></div>
+          <div class="income-item"><div class="income-item-label">Podcast sponsors</div><div class="income-item-val">$3,200</div></div>
+          <div class="income-item"><div class="income-item-label">Membership</div><div class="income-item-val">$2,640</div></div>
+          <div class="income-item"><div class="income-item-label">Affiliate</div><div class="income-item-val">$1,480</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="card">
+        <div class="card-title">Recent posts</div>
+        <table class="posts-table">
+          <thead><tr><th>Content</th><th>Platform</th><th>Views</th><th>Likes</th></tr></thead>
+          <tbody id="posts-tbody"></tbody>
+        </table>
+      </div>
+      <div class="card">
+        <div class="card-title">Brand deals</div>
+        <table class="deals-table">
+          <thead><tr><th>Brand</th><th>Value</th><th>Status</th><th>Due</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:500">Bloom Supplements</td><td>$3,200</td><td><span class="status s-active">Active</span></td><td style="color:var(--color-text-secondary)">May 10</td></tr>
+            <tr><td style="font-weight:500">Linen & Co</td><td>$1,800</td><td><span class="status s-pending">Pending</span></td><td style="color:var(--color-text-secondary)">May 18</td></tr>
+            <tr><td style="font-weight:500">Ritual Wellness</td><td>$2,500</td><td><span class="status s-active">Active</span></td><td style="color:var(--color-text-secondary)">May 5</td></tr>
+            <tr><td style="font-weight:500">Papier Studio</td><td>$900</td><td><span class="status s-done">Completed</span></td><td style="color:var(--color-text-secondary)">Apr 22</td></tr>
+            <tr><td style="font-weight:500">Glow Theory</td><td>$1,600</td><td><span class="status s-pending">Pending</span></td><td style="color:var(--color-text-secondary)">Jun 1</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <div class="card-title">Podcast sponsors</div>
+        <div class="sponsors-list">
+          <div class="sponsor-row"><div class="sponsor-left"><div class="sponsor-icon">B</div><div><div class="sponsor-name">BetterHelp</div><div class="sponsor-ep">Ep. 84, 85, 86</div></div></div><span class="status s-active">Active</span></div>
+          <div class="sponsor-row"><div class="sponsor-left"><div class="sponsor-icon">A</div><div><div class="sponsor-name">AG1 by Athletic Greens</div><div class="sponsor-ep">Ep. 87</div></div></div><span class="status s-pending">Pending</span></div>
+          <div class="sponsor-row"><div class="sponsor-left"><div class="sponsor-icon">S</div><div><div class="sponsor-name">Squarespace</div><div class="sponsor-ep">Ep. 80, 81</div></div></div><span class="status s-done">Completed</span></div>
+          <div class="sponsor-row"><div class="sponsor-left"><div class="sponsor-icon">N</div><div><div class="sponsor-name">NordVPN</div><div class="sponsor-ep">Ep. 88, 89</div></div></div><span class="status s-pending">Pending</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="card briefing-card">
+        <div class="card-title" style="color:#854F0B">Morning briefing</div>
+        <div class="briefing-text" id="briefing-text"></div>
+        <button class="btn-regen" onclick="refreshBriefing()">Regenerate summary</button>
+      </div>
+      <div class="card">
+        <div class="card-title">Social headlines</div>
+        <div class="headlines-list">
+          <div class="headline-row"><div class="hl-dot" style="background:#d4537e"></div><div><div class="hl-text">Reel on morning routines hits 2.1M plays — top performing post in 90 days</div><div class="hl-meta">Instagram · 3h ago</div></div></div>
+          <div class="headline-row"><div class="hl-dot" style="background:#E24B4A"></div><div><div class="hl-text">"Quiet luxury home tour" video crosses 400K views on YouTube</div><div class="hl-meta">YouTube · 1d ago</div></div></div>
+          <div class="headline-row"><div class="hl-dot" style="background:#2C2C2A"></div><div><div class="hl-text">TikTok duet with @wellnesswithval reaches 800K combined views</div><div class="hl-meta">TikTok · 2d ago</div></div></div>
+          <div class="headline-row"><div class="hl-dot" style="background:#7F77DD"></div><div><div class="hl-text">Ep. 84 "Burnout & Boundaries" is the most downloaded episode this year</div><div class="hl-meta">Podcast · 4d ago</div></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Why we do this</div>
+        <div class="comments-list">
+          <div class="comment-card"><div class="avatar" style="background:#FBEAF0;color:#993556">SL</div><div class="comment-body"><div class="comment-user">@sarahloves_life</div><div class="comment-text">"Your morning routine video literally changed how I start my day. Down 15 lbs and actually loving mornings now."</div><div class="comment-plat">Instagram</div></div></div>
+          <div class="comment-card"><div class="avatar" style="background:#EEEDFE;color:#3C3489">MK</div><div class="comment-body"><div class="comment-user">@mk_journals</div><div class="comment-text">"Ep. 84 made me call my therapist. Thank you for being so honest about burnout — felt so seen."</div><div class="comment-plat">Podcast</div></div></div>
+          <div class="comment-card"><div class="avatar" style="background:#EAF3DE;color:#3B6D11">TR</div><div class="comment-body"><div class="comment-user">@tara.reads</div><div class="comment-text">"Been following since 10K. Watching this growth has been so inspiring. You deserve every bit of it."</div><div class="comment-plat">TikTok</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const platformData={ig:{followers:"142,300",views:"2.1M",engagement:"4.2%",posts:"14",fd:"+1,204 this wk",vd:"+340K vs last mo",ed:"+0.4%",pd:"+3"},tt:{followers:"89,600",views:"5.8M",engagement:"6.8%",posts:"22",fd:"+3,410 this wk",vd:"+1.2M vs last mo",ed:"+1.1%",pd:"+5"},yt:{followers:"61,200",views:"940K",engagement:"3.1%",posts:"6",fd:"+820 this wk",vd:"+120K vs last mo",ed:"-0.2%",pd:"+2"},pod:{followers:"28,400",views:"94K",engagement:"—",posts:"4",fd:"+560 this wk",vd:"+12K vs last mo",ed:"—",pd:"+1"}};
+const metricKeys=["followers","views","engagement","posts"];
+const metricDeltas=["fd","vd","ed","pd"];
+function renderMetrics(p){
+  const d=platformData[p];const isPod=p==="pod";
+  const labels=isPod?["Subscribers","Downloads (30d)","","Eps this month"]:["Followers","Views (30d)","Avg engagement","Posts this month"];
+  document.getElementById("metrics-grid").innerHTML=metricKeys.map((k,i)=>{const dval=d[metricDeltas[i]];const isNeg=dval&&dval.includes("-")&&!dval.includes("+");const hide=(isPod&&i===2);return`<div class="metric-box"${hide?' style="opacity:.35"':''}><div class="metric-label">${labels[i]}</div><div class="metric-val">${d[k]}</div><div class="metric-delta ${isNeg?'delta-down':'delta-up'}">${dval}</div></div>`;}).join("");
+}
+const goals=[{label:"200K Instagram followers",pct:71},{label:"100K YouTube subscribers",pct:61},{label:"$150K annual revenue",pct:43},{label:"100K podcast downloads",pct:38},{label:"500K TikTok followers",pct:18}];
+function renderGoals(){
+  document.getElementById("goals-list").innerHTML=goals.map(g=>`<div class="goal-row"><div class="goal-meta"><span class="goal-name">${g.label}</span><span class="goal-pct">${g.pct}%</span></div><div class="bar-track"><div class="bar-fill" style="width:0%" data-pct="${g.pct}"></div></div></div>`).join("");
+  setTimeout(()=>{document.querySelectorAll(".bar-fill").forEach(b=>{b.style.width=b.dataset.pct+"%"})},100);
+}
+const postsData={ig:[{title:"Morning routine reel",plat:"ig",views:"2.1M",likes:"84K"},{title:"What I eat in a day",plat:"ig",views:"890K",likes:"41K"},{title:"Quiet luxury home tour",plat:"ig",views:"540K",likes:"28K"},{title:"5AM wake-up challenge",plat:"ig",views:"320K",likes:"17K"},{title:"Spring capsule wardrobe",plat:"ig",views:"210K",likes:"9.8K"}],tt:[{title:"Get ready with me — Paris trip",plat:"tt",views:"1.8M",likes:"142K"},{title:"Duet: wellness with @val",plat:"tt",views:"800K",likes:"67K"},{title:"Honest skincare routine",plat:"tt",views:"450K",likes:"38K"},{title:"Slow morning vlog",plat:"tt",views:"310K",likes:"22K"},{title:"Books that changed my life",plat:"tt",views:"190K",likes:"15K"}],yt:[{title:"Quiet luxury home tour",plat:"yt",views:"400K",likes:"12K"},{title:"Reading vlog — slow week",plat:"yt",views:"210K",likes:"7.4K"},{title:"Honest brand deal review",plat:"yt",views:"145K",likes:"5.1K"},{title:"My creative business setup",plat:"yt",views:"98K",likes:"3.8K"},{title:"Spring declutter & reset",plat:"yt",views:"87K",likes:"3.2K"}],pod:[{title:"Ep. 84: Burnout & Boundaries",plat:"pod",views:"28K",likes:"—"},{title:"Ep. 83: Building in public",plat:"pod",views:"24K",likes:"—"},{title:"Ep. 82: Morning pages deep dive",plat:"pod",views:"21K",likes:"—"},{title:"Ep. 81: Money & mindset",plat:"pod",views:"19K",likes:"—"}]};
+function renderPosts(p){
+  const rows=postsData[p]||postsData.ig;
+  const colors={ig:"#F5C4B3",tt:"#B4B2A9",yt:"#F09595",pod:"#AFA9EC"};
+  const badge={ig:"badge-ig",tt:"badge-tt",yt:"badge-yt",pod:"badge-pod"};
+  const label={ig:"Instagram",tt:"TikTok",yt:"YouTube",pod:"Podcast"};
+  document.getElementById("posts-tbody").innerHTML=rows.map(r=>`<tr><td><div style="display:flex;align-items:center"><div class="thumb" style="background:${colors[r.plat]}">${r.plat.toUpperCase()}</div><span style="font-size:12px;max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${r.title}</span></div></td><td><span class="badge ${badge[r.plat]}">${label[r.plat]}</span></td><td style="color:var(--color-text-secondary)">${r.views}</td><td style="color:var(--color-text-secondary)">${r.likes}</td></tr>`).join("");
+}
+function switchPlatform(p,el){document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));el.classList.add("active");renderMetrics(p);renderPosts(p);}
+const briefings=["Strong week across all platforms. Your Instagram reel hit 2.1M plays — the algorithm is clearly favoring your content right now. You're 71% toward your follower goal and income is up 18% month-over-month. Three active brand deals are in flight, and BetterHelp renewals look likely. Keep the posting cadence going.","Your podcast is punching above its weight: Ep. 84 is your most downloaded ever and BetterHelp has already flagged renewal interest. TikTok continues to be your fastest-growing platform at +3,410 followers this week. Revenue is on track to hit your $150K annual goal if Q2 holds. Two pending deals need follow-up this week.","Community sentiment is high — the burnout episode is resonating deeply and driving meaningful follower growth across platforms. YouTube is your biggest growth opportunity: at 61K subscribers, you're 39K away from the 100K goal. Consider increasing long-form video cadence in May. Brand deal pipeline is healthy at $10K+ in active and pending value."];
+let briefingIdx=0;
+function refreshBriefing(){const el=document.getElementById("briefing-text");el.classList.add("fade");setTimeout(()=>{briefingIdx=(briefingIdx+1)%briefings.length;el.textContent=briefings[briefingIdx];el.classList.remove("fade");},400);}
+document.getElementById("briefing-text").textContent=briefings[0];
+const now=new Date();
+document.getElementById("date-chip").textContent=now.toLocaleDateString("en-US",{weekday:"short",month:"long",day:"numeric",year:"numeric"});
+renderMetrics("ig");renderGoals();renderPosts("ig");
+</script>
